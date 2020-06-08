@@ -12,5 +12,6 @@ Date:    June 8, 2020
 - [**Adrien Taylor**](https://www.di.ens.fr/~ataylor/)
 - [**Alexandre d'Aspremont**](https://www.di.ens.fr/~aspremon/)
 
-#### Requirements
-- The [Mathematica](https://www.wolfram.com/mathematica/) notebooks in the proofs folder allow to easily verify some statements present in the paper's appendices.
+#### Content
+- The [Mathematica](https://www.wolfram.com/mathematica/) notebooks in the Proofs folder allow to easily verify some statements present in the paper's proofs.
+- The Matlab code in the NumericalExperiments folder allows to reproduce the numerical experiments of the paper on the CUR factorization problem and the deblurring with TV regularization.
