@@ -7,10 +7,11 @@ L = 0.5;
 
 lambda_reg = 0.1;
 
-maxiter=1500;
-maxProxIter=1500;
+maxiter=3000;
+maxProxIter=3000;
 xi = "zero";
 noise = 0.1*randn(256,256);
+blur = ones(5)/25;
 dataset = "boat";
 
 relatives = [[0.9;0],[0.0;0.9],[0.5;0.5]];
@@ -24,7 +25,7 @@ for i = 1:n
    sigma = r(1);
    zeta = r(2);
    
-   [infos{i},X{i}] = TVexp(dataset,5,noise,maxiter,lambda_reg,maxProxIter,sigma,zeta,"zero",L);
+   [infos{i},X{i}] = TVexp(dataset,blur,noise,maxiter,lambda_reg,maxProxIter,sigma,zeta,"zero",L);
    subplot(1,2,2)
    imshow(X{i})
    title(names(i));
@@ -39,7 +40,7 @@ infosa = cell(1,3);
 Xa = cell(1,3);
 for i = 1:3
 xi = "poly"+(i+1);    
-[infosa{i},Xa{i}] = TVexp(dataset,5,noise,maxiter,lambda_reg,maxProxIter,0,0,xi,L);
+[infosa{i},Xa{i}] = TVexp(dataset,blur,noise,maxiter,lambda_reg,maxProxIter,0,0,xi,L);
 subplot(1,2,2)
 imshow(Xa{i});
 title(xi);

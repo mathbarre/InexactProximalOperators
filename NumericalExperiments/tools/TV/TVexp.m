@@ -1,4 +1,4 @@
-function [info,X] = TVexp(dataset,b,noise,maxIter,lambda_reg,initMaxProxIter,sigma,zeta,xi_,initialL)
+function [info,X] = TVexp(dataset,blur,noise,maxIter,lambda_reg,initMaxProxIter,sigma,zeta,xi_,initialL)
 switch xi_
     case "zero"
         xi = @(k) 0;
@@ -22,7 +22,7 @@ backtrack = 1;
 load(dataset);
 W = data;
 
-W    = (imfilter(W, ones(b)/b^2) + noise) ;
+W    = (imfilter(W, blur) + noise) ;
 figure();
 subplot(1,2,1)
 imshow(W,[])
@@ -37,8 +37,8 @@ L = initialL;
 
 
 %% Define Objective Function and Prox
-g = @(X)(1/2)*norm(W-imfilter(X, ones(b)/b^2),'fro')^2;
-gp = @(X)imfilter((imfilter(X, ones(b)/b^2)-W), ones(b)/b^2);
+g = @(X)(1/2)*norm(W-imfilter(X, blur),'fro')^2;
+gp = @(X)imfilter((imfilter(X, blur)-W), blur);
 h = @(X)lambda_reg*sum(sum( sqrt(sum( grad(X).^2,3 )) ));
 prox = @(X,g,L,proxIter,xik)TV_prox(X,g,L,lambda_reg,proxIter,sigma,zeta,xik);
 
