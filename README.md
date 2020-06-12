@@ -1,10 +1,10 @@
 # InexactProximalOperators
 
-Code associated to the work [`reference`](https://arxiv.org/abs/?).
+Code associated to the work [`reference`](https://arxiv.org/abs/2006.06041).
 
-> [1] M. Barré, A. B. Taylor and F. Bach, "Principled Analyses and Design of First-order Methods with Inexact Proximal Operators" arXiv:?, 2020.
+> [1] M. Barré, A. B. Taylor and F. Bach, "Principled Analyses and Design of First-order Methods with Inexact Proximal Operators" arXiv:2006.06041, 2020.
 
-Date:    June 8, 2020
+Date:    June 12, 2020
 
 #### Authors
 
