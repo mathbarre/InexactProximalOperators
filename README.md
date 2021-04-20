@@ -1,7 +1,7 @@
 # InexactProximalOperators
 
 Code associated to the work (coming soon), which is a new version of [`reference`](https://arxiv.org/abs/2006.06041).
-The code associated to the previous version from 2020 can be found in the branch *old_version_2020*.
+The code associated to the previous version from 2020 can be found in the branch **old_version_2020**.
 
 > [1] M. Barré, A. B. Taylor and F. Bach, "Principled Analyses and Design of First-order Methods with Inexact Proximal Operators" arXiv:2006.06041, 2020.
 
