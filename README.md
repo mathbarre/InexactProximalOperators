@@ -8,7 +8,7 @@ Date:    June 12, 2020
 
 #### Authors
 
-- [**Mathieu Barré**](https://github.com/mathbarre/)
+- [**Mathieu Barré**](https://mathbarre.github.io/)
 - [**Adrien Taylor**](https://www.di.ens.fr/~ataylor/)
 - [**Francis Bach**](https://www.di.ens.fr/~fbach/)
 
