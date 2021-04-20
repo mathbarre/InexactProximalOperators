@@ -38,11 +38,6 @@ function [x,gx,fx,w,v,fw,epsVar] = inexact_proximal_step(x0,func,gamma,opt)
 %   - 'PD_gapIII':
 %           PD gap(x,v;x0) <= epsVar for the proximal subproblem,
 %           with v = (x_0-x)/gamma.
-%   - 'Orip-style' (see [1] below)
-%        Approximate proximal operator outputs x such that 
-%        <v; e> + epsilon/gamma <= epsVar for the proximal subproblem,
-%        with x = x_0 - gamma * ( v - e ) with v an epsilon-subgradient of
-%        func at x.
 %
 %
 %
@@ -72,7 +67,7 @@ switch opt.criterion
         
         epsVar  = Point('Function value');
         
-        e       = x-x0+gamma*v;
+        e       = (x-x0+gamma*v);
         eps_sub = fx - fw - v*(x-w);
         gap     = 1/2*e^2 + gamma*eps_sub;
         
@@ -108,29 +103,6 @@ switch opt.criterion
         eps_sub = fx - fw - v*(x-w);
         
         func.AddConstraint(gamma*eps_sub<=epsVar);       
-        
-    case 'Orip-style'
-        % Approximate proximal operator outputs x such that 
-        % <v; e> + epsilon/gamma <= epsVar
-        % with x = x_0 - gamma * ( v - e ) with v an epsilon-subgradient of
-        % func at x.
-        
-        v   = Point('Point');
-        w   = Point('Point');
-        fw  = Point('Function value');
-        func.AddComponent(w,v,fw);
-        
-        e   = Point('Point');
-        gx  = Point('Point');
-        x   = x0 - gamma * ( v - e );
-        fx  = Point('Function value');
-        func.AddComponent(x,gx,fx);
-        epsVar  = Point('Function value');
-                
-        eps_sub = fx - fw - v*(x-w);
-        gap     = e*v + eps_sub/gamma;
-        
-        func.AddConstraint(gap<=epsVar);        
     otherwise
         fprintf('No criterion chosen for inexact prox\n');
 end
