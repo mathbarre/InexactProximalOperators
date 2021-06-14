@@ -51,7 +51,7 @@ switch opt.criterion
         % PD gap(x,v;x0) <= epsVar
         % with v some dual variable, and
         % PD gap(x,v;x0)= 1/2*(x-x0+gamma*v)^2 + gamma *(func(x)+func*(v)-<v;x>),
-        % in which we conveniently use fync*(v) = <v,w>-func(w) for some w such
+        % in which we conveniently use func*(v) = <v,w>-func(w) for some w such
         % that v\in\partial func(w).
                 
         v   = Point('Point');
@@ -102,7 +102,47 @@ switch opt.criterion
                 
         eps_sub = fx - fw - v*(x-w);
         
-        func.AddConstraint(gamma*eps_sub<=epsVar);       
+        func.AddConstraint(gamma*eps_sub<=epsVar);
+        case 'PD_gapIV'
+        % Approximate proximal operator outputs x such that 
+        % PD gap(u,(x0-x)/gamma;x0) <= epsVar
+        % with u some primal variable, and
+        % PD gap(u,(x0-x)/gamma;x0)= 1/2*(x-u)^2 + gamma *(func(u)+func*((x0-x)/gamma)-<(x0-x)/gamma;u>),
+        % in which we conveniently use func*((x0-x)/gamma) = <(x0-x)/gamma,w>-func(w) for some w such
+        % that (x0-x)/gamma\in\partial func(w).
+                
+        x   = Point('Point');
+        u   = Point('Point'); 
+        v   = (x0-x)/gamma;
+        w   = Point('Point');
+        fw  = Point('Function value');
+        gu  = Point('Point');
+        fu  = Point('Function value');
+        func.AddComponent(w,v,fw);
+        func.AddComponent(u,gu,fu);
+        epsVar  = Point('Function value');
+        gx = u;
+        fx = fu;
+        eps_sub = fu - fw - v*(u-w);
+        
+        func.AddConstraint(1/2*(x-u)^2 +gamma*eps_sub<=epsVar);   
+        
+        case 'PD_gapV'
+        % Approximate proximal operator outputs x such that 
+        % PD gap(x,(x0-prox(x0))/gamma;x0) <= epsVar
+       
+                
+        x   = Point('Point');
+        gx  = Point('Point');
+        fx  = Point('Function value');
+        w   = Point('Point');
+        v   = (x0 - w)/gamma;
+        fw  = Point('Function value');
+        func.AddComponent(x,gx,fx);
+        func.AddComponent(w,v,fw);
+        epsVar  = Point('Function value');
+        
+        func.AddConstraint(fx + 0.5/gamma*(x-x0)^2 - fw - 0.5/gamma*(w-x0)^2 <=epsVar); 
     otherwise
         fprintf('No criterion chosen for inexact prox\n');
 end
