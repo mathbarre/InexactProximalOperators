@@ -4,7 +4,7 @@ Code associated to the work [`V2`](https://arxiv.org/abs/2006.06041v2), a [`new 
 
 > [1] M. Barré, A. B. Taylor and F. Bach, "Principled Analyses and Design of First-order Methods with Inexact Proximal Operators" arXiv:2006.06041[V2], 2020.
 
-Date:    June 12, 2020
+Date:    June 29, 2021
 
 #### Authors
 
